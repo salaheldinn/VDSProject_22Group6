@@ -53,3 +53,12 @@ TEST(ManagerFuncsTest, TestCreateVar) {
     }
 
 }
+
+
+
+/*Test Function "const BDD_ID &Manager::True(){}"*/
+TEST(ManagerFuncsTest, TestTrueFunc) {
+
+    ClassProject:: Manager Test_ROBDD   ;
+    EXPECT_EQ(1,Test_ROBDD.True());
+}
