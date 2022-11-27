@@ -18,7 +18,9 @@ BDD_ID Manager::createVar(const std::string &label){
     return temp_entry.id;
 }
 
-const BDD_ID &Manager::True(){}
+const BDD_ID &Manager::True(){
+    return unique_table[1].id;
+}
 
 const BDD_ID &Manager::False(){};
 
