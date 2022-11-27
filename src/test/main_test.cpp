@@ -62,3 +62,10 @@ TEST(ManagerFuncsTest, TestTrueFunc) {
     ClassProject:: Manager Test_ROBDD   ;
     EXPECT_EQ(1,Test_ROBDD.True());
 }
+
+/*Test Function "const BDD_ID &Manager::False(){}"*/
+TEST(ManagerFuncsTest, TestFalseFunc) {
+
+    ClassProject:: Manager Test_ROBDD   ;
+    EXPECT_EQ(0,Test_ROBDD.False());
+}
