@@ -12,7 +12,11 @@ Manager::Manager(){
     unique_table.push_back(temp_entry);
 }
 
-BDD_ID Manager::createVar(const std::string &label){};
+BDD_ID Manager::createVar(const std::string &label){
+    unique_table_entry temp_entry = {.id=unique_table.size(), .high=1, .low=0, .topvar=unique_table.size(), .label=label};
+    unique_table.push_back(temp_entry);
+    return temp_entry.id;
+}
 
 const BDD_ID &Manager::True(){}
 
