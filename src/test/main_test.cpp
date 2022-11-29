@@ -69,3 +69,31 @@ TEST(ManagerFuncsTest, TestFalseFunc) {
     ClassProject:: Manager Test_ROBDD   ;
     EXPECT_EQ(0,Test_ROBDD.False());
 }
+
+
+
+/*Test Function "bool Manager::isConstant(BDD_ID f){};*/
+TEST(ManagerFuncsTest, Test_isConstantFunc) {
+
+    /*Declare used variables*/
+    ClassProject::Manager Test_ROBDD;
+    bool Loc_isLeafNode;
+
+    /**/
+    Test_ROBDD.createVar("a");
+
+    for (ClassProject::BDD_ID i = 0 ; i < 3 ; i++)
+    {
+
+        Loc_isLeafNode = Test_ROBDD.isConstant(i);
+        if (i > 1)
+        {
+            EXPECT_FALSE(Loc_isLeafNode);
+        }
+        else
+        {
+            EXPECT_TRUE(Loc_isLeafNode);
+        } //end if
+
+    } //end for
+} //end func
