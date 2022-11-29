@@ -5,16 +5,19 @@
 using namespace ClassProject;
 
 Manager::Manager(){
-    //Initialize False and True in the unique table
+    //Initialize False and True in the unique table and hash unique table
     unique_table_entry temp_entry = {.id=0, .high=0, .low=0, .topvar=0, .label="False"};
     unique_table.push_back(temp_entry);
+    hash_unique_table.insert({{0, 0, 0}, 0});
     temp_entry = {.id=1, .high=1, .low=1, .topvar=1, .label="True"};
     unique_table.push_back(temp_entry);
+    hash_unique_table.insert({{1, 1, 1}, 1});
 }
 
 BDD_ID Manager::createVar(const std::string &label){
     unique_table_entry temp_entry = {.id=unique_table.size(), .high=1, .low=0, .topvar=unique_table.size(), .label=label};
     unique_table.push_back(temp_entry);
+    hash_unique_table.insert({{1, 0, unique_table.size()-1}, unique_table.size()-1});
     return temp_entry.id;
 }
 

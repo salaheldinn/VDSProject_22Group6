@@ -7,6 +7,7 @@
 
 #include "ManagerInterface.h"
 #include <vector>
+#include <boost/functional/hash.hpp>
 
 
 namespace ClassProject {
@@ -19,9 +20,35 @@ namespace ClassProject {
         std::string label;
     };
 
+    struct Key
+    {
+        BDD_ID first;
+        BDD_ID second;
+        BDD_ID third;
+        bool operator==(const Key &other) const
+        { return (first==other.first && second==other.second && third==other.third);
+        }
+    };
+
+    struct KeyHasher
+    {
+        std::size_t operator()(const Key& k) const
+        {
+            using boost::hash_value;
+            using boost::hash_combine;
+            std::size_t seed = 0;
+            hash_combine(seed,hash_value(k.first));
+            hash_combine(seed,hash_value(k.second));
+            hash_combine(seed,hash_value(k.third));
+            return seed;
+        }
+    };
+
     class Manager : public ManagerInterface {
     public:
         std::vector<unique_table_entry> unique_table;
+
+        std::unordered_map<Key,BDD_ID,KeyHasher> hash_unique_table;
 
         Manager();
 
