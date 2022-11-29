@@ -37,6 +37,8 @@ namespace ClassProject {
 
         BDD_ID topVar(BDD_ID f);
 
+        BDD_ID find_or_add_unique_table(BDD_ID tv, BDD_ID h, BDD_ID l);
+
         BDD_ID ite(BDD_ID i, BDD_ID t, BDD_ID e);
 
         BDD_ID coFactorTrue(BDD_ID f, BDD_ID x);

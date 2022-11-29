@@ -38,6 +38,8 @@ BDD_ID Manager::topVar(BDD_ID f){
     return unique_table[f].topvar;
 }
 
+BDD_ID Manager::find_or_add_unique_table(BDD_ID tv, BDD_ID h, BDD_ID l){};
+
 BDD_ID Manager::ite(BDD_ID i, BDD_ID t, BDD_ID e){}
 
 BDD_ID Manager::coFactorTrue(BDD_ID f, BDD_ID x){};
