@@ -144,4 +144,20 @@ TEST(ManagerFuncsTest, Test_topVarFunc) {
 
 }
 
+TEST(ManagerFuncsTest, Test_hash_unique_table) {
+
+    ClassProject::Manager Test_ROBDD;
+    ClassProject::BDD_ID id_of_a = Test_ROBDD.createVar("a");
+    //find entry of True
+    auto indx = Test_ROBDD.hash_unique_table.find({1, 1, 1});
+    EXPECT_EQ(indx->second, 1);
+    //find entry of a
+    indx = Test_ROBDD.hash_unique_table.find({1, 0, 2});
+    EXPECT_EQ(indx->second, id_of_a);
+    //find non-existent entry
+    indx = Test_ROBDD.hash_unique_table.find({1, 0, 3});
+    EXPECT_EQ(indx, Test_ROBDD.hash_unique_table.end());
+}
+
+
 
