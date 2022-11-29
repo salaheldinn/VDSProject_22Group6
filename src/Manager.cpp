@@ -30,7 +30,9 @@ bool Manager::isConstant(BDD_ID f){
     return (f==0||f==1) ? true : false;
 }
 
-bool Manager::isVariable(BDD_ID x){};
+bool Manager::isVariable(BDD_ID f){
+    return (unique_table[f].high==1 && unique_table[f].low==0) ? true : false;
+}
 
 BDD_ID Manager::topVar(BDD_ID f){};
 
