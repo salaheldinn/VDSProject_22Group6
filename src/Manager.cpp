@@ -34,9 +34,11 @@ bool Manager::isVariable(BDD_ID f){
     return (unique_table[f].high==1 && unique_table[f].low==0) ? true : false;
 }
 
-BDD_ID Manager::topVar(BDD_ID f){};
+BDD_ID Manager::topVar(BDD_ID f){
+    return unique_table[f].topvar;
+}
 
-BDD_ID Manager::ite(BDD_ID i, BDD_ID t, BDD_ID e){};
+BDD_ID Manager::ite(BDD_ID i, BDD_ID t, BDD_ID e){}
 
 BDD_ID Manager::coFactorTrue(BDD_ID f, BDD_ID x){};
 
