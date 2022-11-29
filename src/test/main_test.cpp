@@ -127,3 +127,21 @@ TEST(ManagerFuncsTest, Test_isVarFunc) {
 
 
 
+/*Test Function "BDD_ID Manager::topVar(BDD_ID f){};"*/
+TEST(ManagerFuncsTest, Test_topVarFunc) {
+
+    /*Declare used variables*/
+    ClassProject::Manager Test_ROBDD;
+
+    /**/
+    Test_ROBDD.createVar("a");
+
+    for (ClassProject::BDD_ID i = 0 ; i < 3 ; i++)
+    {
+        EXPECT_EQ(Test_ROBDD.unique_table[i].topvar, Test_ROBDD.topVar(i));
+    }
+
+
+}
+
+
