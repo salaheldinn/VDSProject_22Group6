@@ -97,3 +97,33 @@ TEST(ManagerFuncsTest, Test_isConstantFunc) {
 
     } //end for
 } //end func
+
+/*Test Function "bool Manager::isVariable(BDD_ID x){};"*/
+TEST(ManagerFuncsTest, Test_isVarFunc) {
+
+    /*Declare used variables*/
+    ClassProject::Manager Test_ROBDD;
+    bool Loc_isVarNode;
+
+    /**/
+    Test_ROBDD.createVar("a");
+
+    for (ClassProject::BDD_ID i = 0 ; i < 3 ; i++)
+    {
+
+        Loc_isVarNode = Test_ROBDD.isVariable(i);
+        /*this if statement need to be updated after implementing and2, or2, ... */
+        if (i <= 1)
+        {
+            EXPECT_FALSE(Loc_isVarNode);
+        }
+        else
+        {
+            EXPECT_TRUE(Loc_isVarNode);
+        } //end if
+
+    } //end for
+} //end func
+
+
+
