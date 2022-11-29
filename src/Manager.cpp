@@ -26,7 +26,9 @@ const BDD_ID &Manager::False(){
     return unique_table[0].id;
 }
 
-bool Manager::isConstant(BDD_ID f){};
+bool Manager::isConstant(BDD_ID f){
+    return (f==0||f==1) ? true : false;
+}
 
 bool Manager::isVariable(BDD_ID x){};
 
