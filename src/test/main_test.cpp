@@ -161,3 +161,14 @@ TEST(ManagerFuncsTest, Test_hash_unique_table) {
 
 
 
+/*Test Function "size_t Manager::uniqueTableSize(){};"*/
+/*this test will be improved after implementing and2, or2...functions*/
+TEST(ManagerFuncsTest, Test_uniqueTableSize) {
+
+    /*Declare used variables*/
+    ClassProject::Manager Test_ROBDD;
+
+    Test_ROBDD.createVar("a");
+    Test_ROBDD.createVar("b");
+    EXPECT_EQ(4, Test_ROBDD.uniqueTableSize());
+}
