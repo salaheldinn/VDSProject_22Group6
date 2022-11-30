@@ -205,3 +205,12 @@ TEST(ManagerFuncsTest, Test_coFactorFalse1) {
         EXPECT_EQ(Test_ROBDD.unique_table[i].low, Test_ROBDD.coFactorFalse(i));
     }
 }
+
+TEST(ManagerFuncsTest, Test_find_or_add_unique_table) {
+    ClassProject::Manager Test_ROBDD;
+    ClassProject::BDD_ID id_of_a = Test_ROBDD.createVar("a");
+    //find ID of a
+    EXPECT_EQ(Test_ROBDD.find_or_add_unique_table(2, 1, 0), id_of_a);
+    //add new entry
+    EXPECT_EQ(Test_ROBDD.find_or_add_unique_table(3, 1, 0), 3);
+}
