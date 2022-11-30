@@ -41,8 +41,18 @@ BDD_ID Manager::topVar(BDD_ID f){
     return unique_table[f].topvar;
 }
 
-BDD_ID Manager::find_or_add_unique_table(BDD_ID tv, BDD_ID h, BDD_ID l){};
-
+BDD_ID Manager::find_or_add_unique_table(BDD_ID tv, BDD_ID h, BDD_ID l){
+    auto indx = hash_unique_table.find({h, l, tv});
+    //add entry
+    if (indx==hash_unique_table.end()) {
+        unique_table_entry temp_entry = {.id=uniqueTableSize(), .high=h, .low=l, .topvar=tv, .label=""};
+        unique_table.push_back(temp_entry);
+        hash_unique_table.insert({{h, l, tv}, unique_table[uniqueTableSize()-1].id});
+        return unique_table[uniqueTableSize()-1].id;
+    }
+    //entry found
+    else return indx->second;
+}
 BDD_ID Manager::ite(BDD_ID i, BDD_ID t, BDD_ID e){}
 
 BDD_ID Manager::coFactorTrue(BDD_ID f, BDD_ID x){};
