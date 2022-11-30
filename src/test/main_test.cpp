@@ -189,3 +189,19 @@ TEST(ManagerFuncsTest, Test_coFactorTrue1) {
         EXPECT_EQ(Test_ROBDD.unique_table[i].high, Test_ROBDD.coFactorTrue(i));
     }
 }
+
+/*Test Function "BDD_ID Manager::coFactorFalse(BDD_ID f){};"*/
+/*this test will be improved after implementing and2, or2...functions*/
+TEST(ManagerFuncsTest, Test_coFactorFalse1) {
+
+    /*Declare used variables*/
+    ClassProject::Manager Test_ROBDD;
+
+    /**/
+    Test_ROBDD.createVar("a");
+
+    for (ClassProject::BDD_ID i = 0 ; i < 3 ; i++)
+    {
+        EXPECT_EQ(Test_ROBDD.unique_table[i].low, Test_ROBDD.coFactorFalse(i));
+    }
+}
