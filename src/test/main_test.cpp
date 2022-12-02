@@ -214,3 +214,40 @@ TEST(ManagerFuncsTest, Test_find_or_add_unique_table) {
     //add new entry
     EXPECT_EQ(Test_ROBDD.find_or_add_unique_table(3, 1, 0), 3);
 }
+
+
+/*Test Function "BDD_ID Manager::ite(BDD_ID i, BDD_ID t, BDD_ID e){}"*/
+/*this test will be improved after implementing and2, or2...functions*/
+TEST(ManagerFuncsTest, Test_ite) {
+
+    /*Declare used variables*/
+    ClassProject::Manager Test_ROBDD;
+
+    /**/
+    ClassProject::BDD_ID a = Test_ROBDD.createVar("a");
+    ClassProject::BDD_ID b = Test_ROBDD.createVar("b");
+
+
+    /*All terminal cases*/
+    ClassProject::BDD_ID  exp_a= Test_ROBDD.ite(1,a,b);
+    ClassProject::BDD_ID  exp_b= Test_ROBDD.ite(0,a,b);
+    ClassProject::BDD_ID  exp_a2= Test_ROBDD.ite(a,1,0);
+    ClassProject::BDD_ID  exp_b2= Test_ROBDD.ite(a,b,b);
+    ClassProject::BDD_ID  exp_notA= Test_ROBDD.ite(a,0,1);
+    ClassProject::BDD_ID  exp_a3 = Test_ROBDD.ite(exp_notA,0,1); //to test computed table, "a" should not be repeated in unique table
+
+
+    /*Terminal Cases test*/
+    EXPECT_EQ(2, exp_a);
+    EXPECT_EQ(2, exp_a2);
+    EXPECT_EQ(2, exp_a3);
+
+    EXPECT_EQ(3, exp_b);
+    EXPECT_EQ(3, exp_b2);
+
+    EXPECT_EQ(4, exp_notA);
+    EXPECT_EQ(2, Test_ROBDD.unique_table[exp_notA].topvar);
+    EXPECT_EQ(0, Test_ROBDD.unique_table[exp_notA].high);
+    EXPECT_EQ(1, Test_ROBDD.unique_table[exp_notA].low);
+
+}
