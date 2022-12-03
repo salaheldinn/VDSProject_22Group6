@@ -260,3 +260,17 @@ TEST(ManagerFuncsTest, Test_getTopVarName) {
     EXPECT_EQ(Test_ROBDD.getTopVarName(id_of_a_and_b), "a");
     EXPECT_EQ(Test_ROBDD.getTopVarName(id_of_b), "b");
 }
+
+TEST(ManagerFuncsTest, Test_findNodes) {
+    ClassProject::Manager Test_ROBDD;
+    ClassProject::BDD_ID id_of_a = Test_ROBDD.createVar("a");
+    ClassProject::BDD_ID id_of_b = Test_ROBDD.createVar("b");
+    ClassProject::BDD_ID id_of_a_and_b = Test_ROBDD.ite(id_of_a, id_of_b, 0);
+    std::set<ClassProject::BDD_ID> found_nodes;
+    Test_ROBDD.findNodes(id_of_a_and_b, found_nodes);
+    EXPECT_EQ(found_nodes.size(), 4);
+    EXPECT_NE(found_nodes.find(0), found_nodes.end());
+    EXPECT_NE(found_nodes.find(1), found_nodes.end());
+    EXPECT_NE(found_nodes.find(id_of_b), found_nodes.end());
+    EXPECT_NE(found_nodes.find(id_of_a_and_b), found_nodes.end());
+}
