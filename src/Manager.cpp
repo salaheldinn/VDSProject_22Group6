@@ -137,7 +137,10 @@ BDD_ID Manager::nor2(BDD_ID a, BDD_ID b){};
 
 BDD_ID Manager::xnor2(BDD_ID a, BDD_ID b){};
 
-std::string Manager::getTopVarName(const BDD_ID &root){};
+std::string Manager::getTopVarName(const BDD_ID &root){
+    BDD_ID topvar_of_root = topVar(root);
+    return unique_table[topvar_of_root].label;
+}
 
 void Manager::findNodes(const BDD_ID &root, std::set<BDD_ID> &nodes_of_root){};
 
