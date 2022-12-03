@@ -154,7 +154,16 @@ void Manager::findNodes(const BDD_ID &root, std::set<BDD_ID> &nodes_of_root){
     }
 }
 
-void Manager::findVars(const BDD_ID &root, std::set<BDD_ID> &vars_of_root){};
+void Manager::findVars(const BDD_ID &root, std::set<BDD_ID> &vars_of_root){
+    //if top variable has already been added don't add again
+    if (vars_of_root.find(topVar(root)) == vars_of_root.end())
+        vars_of_root.insert(topVar(root));
+    //if node is not a constant find top variables of reachable nodes of high and low
+    if (!isConstant(root)) {
+        findNodes(coFactorTrue(root), vars_of_root);
+        findNodes(coFactorFalse(root), vars_of_root);
+    }
+}
 
 size_t Manager::uniqueTableSize(){
     return unique_table.size();
