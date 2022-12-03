@@ -142,7 +142,17 @@ std::string Manager::getTopVarName(const BDD_ID &root){
     return unique_table[topvar_of_root].label;
 }
 
-void Manager::findNodes(const BDD_ID &root, std::set<BDD_ID> &nodes_of_root){};
+void Manager::findNodes(const BDD_ID &root, std::set<BDD_ID> &nodes_of_root){
+    //if node has already been added do nothing
+    if (nodes_of_root.find(root) == nodes_of_root.end()){
+        nodes_of_root.insert(root);
+        //if node is not a constant find reachable nodes of high and low
+        if (!isConstant(root)) {
+            findNodes(coFactorTrue(root), nodes_of_root);
+            findNodes(coFactorFalse(root), nodes_of_root);
+        }
+    }
+}
 
 void Manager::findVars(const BDD_ID &root, std::set<BDD_ID> &vars_of_root){};
 
