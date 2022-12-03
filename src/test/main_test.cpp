@@ -251,3 +251,12 @@ TEST(ManagerFuncsTest, Test_ite) {
     EXPECT_EQ(1, Test_ROBDD.unique_table[exp_notA].low);
 
 }
+
+TEST(ManagerFuncsTest, Test_getTopVarName) {
+    ClassProject::Manager Test_ROBDD;
+    ClassProject::BDD_ID id_of_a = Test_ROBDD.createVar("a");
+    ClassProject::BDD_ID id_of_b = Test_ROBDD.createVar("b");
+    ClassProject::BDD_ID id_of_a_and_b = Test_ROBDD.ite(id_of_a, id_of_b, 0);
+    EXPECT_EQ(Test_ROBDD.getTopVarName(id_of_a_and_b), "a");
+    EXPECT_EQ(Test_ROBDD.getTopVarName(id_of_b), "b");
+}
