@@ -147,7 +147,9 @@ BDD_ID Manager::nor2(BDD_ID a, BDD_ID b){
     return ite(a, 0, neg(b));
 }
 
-BDD_ID Manager::xnor2(BDD_ID a, BDD_ID b){};
+BDD_ID Manager::xnor2(BDD_ID a, BDD_ID b){
+    return ite(a, b, neg(b));
+}
 
 std::string Manager::getTopVarName(const BDD_ID &root){
     BDD_ID topvar_of_root = topVar(root);
