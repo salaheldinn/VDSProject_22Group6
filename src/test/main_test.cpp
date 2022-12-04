@@ -294,12 +294,11 @@ TEST(ManagerFuncsTest, Test_neg) {
 
     ClassProject::Manager Test_ROBDD;
     ClassProject::BDD_ID a = Test_ROBDD.createVar("a");
-    ClassProject::BDD_ID NOTa = Test_ROBDD.neg(a);
-
-    EXPECT_EQ(Test_ROBDD.unique_table[a].high, Test_ROBDD.unique_table[NOTa].low);
-    EXPECT_EQ(Test_ROBDD.unique_table[a].low, Test_ROBDD.unique_table[NOTa].high);
-    EXPECT_EQ(1, Test_ROBDD.neg(0));
-    EXPECT_EQ(0, Test_ROBDD.neg(1));
+    ClassProject::BDD_ID not_a = Test_ROBDD.neg(a);
+    EXPECT_EQ(Test_ROBDD.topVar(not_a), a);
+    EXPECT_EQ(Test_ROBDD.coFactorTrue(not_a), Test_ROBDD.False());
+    EXPECT_EQ(Test_ROBDD.coFactorFalse(not_a), Test_ROBDD.True());
+    EXPECT_EQ(Test_ROBDD.neg(0), Test_ROBDD.True());
 }
 
 
