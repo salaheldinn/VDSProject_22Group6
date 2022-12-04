@@ -127,7 +127,9 @@ BDD_ID Manager::neg(BDD_ID a){
     return ite(a, 0, 1);
 }
 
-BDD_ID Manager::and2(BDD_ID a, BDD_ID b){};
+BDD_ID Manager::and2(BDD_ID a, BDD_ID b){
+    return ite(a, b, 0);
+}
 
 BDD_ID Manager::or2(BDD_ID a, BDD_ID b){};
 
