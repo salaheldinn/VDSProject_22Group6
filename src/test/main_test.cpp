@@ -315,3 +315,19 @@ TEST(ManagerFuncsTest, Test_and2) {
     EXPECT_EQ(Test_ROBDD.and2(1,0), Test_ROBDD.False());
     EXPECT_EQ(Test_ROBDD.and2(1,1), Test_ROBDD.True());
 }
+
+
+TEST(ManagerFuncsTest, Test_or2) {
+
+    ClassProject::Manager Test_ROBDD;
+    ClassProject::BDD_ID a = Test_ROBDD.createVar("a");
+    ClassProject::BDD_ID b = Test_ROBDD.createVar("b");
+    ClassProject::BDD_ID aORb = Test_ROBDD.or2(a,b);
+
+    EXPECT_EQ(Test_ROBDD.topVar(aORb), a);
+    EXPECT_EQ(Test_ROBDD.coFactorTrue(aORb), Test_ROBDD.True());
+    EXPECT_EQ(Test_ROBDD.coFactorFalse(aORb), b);
+    EXPECT_EQ(Test_ROBDD.or2(0,0), Test_ROBDD.False());
+    EXPECT_EQ(Test_ROBDD.or2(1,0), Test_ROBDD.True());
+    EXPECT_EQ(Test_ROBDD.or2(0,1), Test_ROBDD.True());
+}
