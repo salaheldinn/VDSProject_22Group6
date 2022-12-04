@@ -301,4 +301,17 @@ TEST(ManagerFuncsTest, Test_neg) {
     EXPECT_EQ(Test_ROBDD.neg(0), Test_ROBDD.True());
 }
 
+TEST(ManagerFuncsTest, Test_and2) {
 
+    ClassProject::Manager Test_ROBDD;
+    ClassProject::BDD_ID a = Test_ROBDD.createVar("a");
+    ClassProject::BDD_ID b = Test_ROBDD.createVar("b");
+    ClassProject::BDD_ID aANDb = Test_ROBDD.and2(a,b);
+
+    EXPECT_EQ(Test_ROBDD.topVar(aANDb), a);
+    EXPECT_EQ(Test_ROBDD.coFactorTrue(aANDb), b);
+    EXPECT_EQ(Test_ROBDD.coFactorFalse(aANDb), Test_ROBDD.False());
+    EXPECT_EQ(Test_ROBDD.and2(0,1), Test_ROBDD.False());
+    EXPECT_EQ(Test_ROBDD.and2(1,0), Test_ROBDD.False());
+    EXPECT_EQ(Test_ROBDD.and2(1,1), Test_ROBDD.True());
+}
