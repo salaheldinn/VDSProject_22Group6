@@ -392,4 +392,4 @@ TEST(ManagerFuncsTest, Test_xnor2) {
     EXPECT_EQ(Test_ROBDD.xnor2(0,0), Test_ROBDD.True());
     EXPECT_EQ(Test_ROBDD.xnor2(1,0), Test_ROBDD.False());
     EXPECT_EQ(Test_ROBDD.xnor2(0,1), Test_ROBDD.False());
-}
+}g
