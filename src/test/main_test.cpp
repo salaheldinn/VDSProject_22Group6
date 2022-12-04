@@ -290,4 +290,16 @@ TEST(ManagerFuncsTest, Test_findVars) {
 }
 
 
+TEST(ManagerFuncsTest, Test_neg) {
+
+    ClassProject::Manager Test_ROBDD;
+    ClassProject::BDD_ID a = Test_ROBDD.createVar("a");
+    ClassProject::BDD_ID NOTa = Test_ROBDD.neg(a);
+
+    EXPECT_EQ(Test_ROBDD.unique_table[a].high, Test_ROBDD.unique_table[NOTa].low);
+    EXPECT_EQ(Test_ROBDD.unique_table[a].low, Test_ROBDD.unique_table[NOTa].high);
+    EXPECT_EQ(1, Test_ROBDD.neg(0));
+    EXPECT_EQ(0, Test_ROBDD.neg(1));
+}
+
 
