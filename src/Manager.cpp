@@ -157,25 +157,20 @@ std::string Manager::getTopVarName(const BDD_ID &root){
 }
 
 void Manager::findNodes(const BDD_ID &root, std::set<BDD_ID> &nodes_of_root){
-    //if node has already been added do nothing
-    if (nodes_of_root.find(root) == nodes_of_root.end()){
-        nodes_of_root.insert(root);
-        //if node is not a constant find reachable nodes of high and low
-        if (!isConstant(root)) {
-            findNodes(coFactorTrue(root), nodes_of_root);
-            findNodes(coFactorFalse(root), nodes_of_root);
-        }
+    auto ret = nodes_of_root.insert(root);
+    //if node is new and not a constant find reachable nodes of high and low
+    if (!isConstant(root) && ret.second) {
+        findNodes(coFactorTrue(root), nodes_of_root);
+        findNodes(coFactorFalse(root), nodes_of_root);
     }
 }
 
 void Manager::findVars(const BDD_ID &root, std::set<BDD_ID> &vars_of_root){
-    //if top variable has already been added don't add again
-    if (vars_of_root.find(topVar(root)) == vars_of_root.end())
-        vars_of_root.insert(topVar(root));
-    //if node is not a constant find top variables of reachable nodes of high and low
+    //if node is not constant add topvar and recurse for high and low
     if (!isConstant(root)) {
-        findNodes(coFactorTrue(root), vars_of_root);
-        findNodes(coFactorFalse(root), vars_of_root);
+        vars_of_root.insert(topVar(root));
+        findVars(coFactorTrue(root), vars_of_root);
+        findVars(coFactorFalse(root), vars_of_root);
     }
 }
 
