@@ -282,9 +282,9 @@ TEST(ManagerFuncsTest, Test_findVars) {
     ClassProject::BDD_ID id_of_a_and_b = Test_ROBDD.ite(id_of_a, id_of_b, 0);
     std::set<ClassProject::BDD_ID> found_vars;
     Test_ROBDD.findVars(id_of_a_and_b, found_vars);
-    EXPECT_EQ(found_vars.size(), 4);
-    EXPECT_NE(found_vars.find(0), found_vars.end());
-    EXPECT_NE(found_vars.find(1), found_vars.end());
+    EXPECT_EQ(found_vars.size(), 2);
+    EXPECT_EQ(found_vars.find(0), found_vars.end());
+    EXPECT_EQ(found_vars.find(1), found_vars.end());
     EXPECT_NE(found_vars.find(id_of_b), found_vars.end());
     EXPECT_NE(found_vars.find(id_of_a), found_vars.end());
 }
