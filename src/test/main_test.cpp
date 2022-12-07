@@ -434,3 +434,23 @@ TEST(ManagerFuncsTest, Test_example2) {
     ClassProject::BDD_ID f = Test_ROBDD.and2(a_b_c, b_and_c);
     EXPECT_EQ(f, b_and_c);
 }
+
+TEST(ManagerFuncsTest, Test_coFactorTrue2) {
+    //test recursion in coFactorTrue not covered by ite
+    ClassProject::Manager Test_ROBDD;
+    ClassProject::BDD_ID a = Test_ROBDD.createVar("a");
+    ClassProject::BDD_ID b = Test_ROBDD.createVar("b");
+    ClassProject::BDD_ID a_and_b = Test_ROBDD.and2(a, b);
+    EXPECT_EQ(Test_ROBDD.coFactorTrue(a_and_b, b), a);
+}
+
+TEST(ManagerFuncsTest, Test_coFactorFalse2) {
+    //test recursion in coFactorFalse not covered by ite
+    ClassProject::Manager Test_ROBDD;
+    ClassProject::BDD_ID a = Test_ROBDD.createVar("a");
+    ClassProject::BDD_ID b = Test_ROBDD.createVar("b");
+    ClassProject::BDD_ID a_and_b = Test_ROBDD.and2(a, b);
+    EXPECT_EQ(Test_ROBDD.coFactorFalse(a_and_b, b), Test_ROBDD.False());
+}
+
+
