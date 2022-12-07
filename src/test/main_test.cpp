@@ -393,3 +393,44 @@ TEST(ManagerFuncsTest, Test_xnor2) {
     EXPECT_EQ(Test_ROBDD.xnor2(1,0), Test_ROBDD.False());
     EXPECT_EQ(Test_ROBDD.xnor2(0,1), Test_ROBDD.False());
 }
+
+TEST(ManagerFuncsTest, Test_example) {
+    // f = (a + b) * c * d function from Document part 1
+    ClassProject::Manager Test_ROBDD;
+    ClassProject::BDD_ID a = Test_ROBDD.createVar("a");
+    ClassProject::BDD_ID b = Test_ROBDD.createVar("b");
+    ClassProject::BDD_ID c = Test_ROBDD.createVar("c");
+    ClassProject::BDD_ID d = Test_ROBDD.createVar("d");
+    ClassProject::BDD_ID a_or_b = Test_ROBDD.or2(a, b);
+    ClassProject::BDD_ID c_and_d = Test_ROBDD.and2(c, d);
+    ClassProject::BDD_ID f = Test_ROBDD.and2(a_or_b, c_and_d);
+    //check size of unique table
+    EXPECT_EQ(Test_ROBDD.uniqueTableSize(), 10);
+    //check top variables
+    EXPECT_EQ(Test_ROBDD.topVar(a_or_b), a);
+    EXPECT_EQ(Test_ROBDD.topVar(c_and_d), c);
+    EXPECT_EQ(Test_ROBDD.topVar(8), 3);
+    EXPECT_EQ(Test_ROBDD.topVar(f), a);
+    //check pos cofactors
+    EXPECT_EQ(Test_ROBDD.coFactorTrue(a_or_b), Test_ROBDD.True());
+    EXPECT_EQ(Test_ROBDD.coFactorTrue(c_and_d), d);
+    EXPECT_EQ(Test_ROBDD.coFactorTrue(8), c_and_d);
+    EXPECT_EQ(Test_ROBDD.coFactorTrue(f), c_and_d);
+    //check neg cofactors
+    EXPECT_EQ(Test_ROBDD.coFactorFalse(a_or_b), b);
+    EXPECT_EQ(Test_ROBDD.coFactorFalse(c_and_d), Test_ROBDD.False());
+    EXPECT_EQ(Test_ROBDD.coFactorFalse(8), Test_ROBDD.False());
+    EXPECT_EQ(Test_ROBDD.coFactorFalse(f), 8);
+}
+
+TEST(ManagerFuncsTest, Test_example2) {
+    // f = (b * c)((b * c) + a) this function tests whether a node with equal positive and negative cofactors is reduced
+    ClassProject::Manager Test_ROBDD;
+    ClassProject::BDD_ID a = Test_ROBDD.createVar("a");
+    ClassProject::BDD_ID b = Test_ROBDD.createVar("b");
+    ClassProject::BDD_ID c = Test_ROBDD.createVar("c");
+    ClassProject::BDD_ID b_and_c = Test_ROBDD.and2(b, c);
+    ClassProject::BDD_ID a_b_c = Test_ROBDD.or2(a, b_and_c);
+    ClassProject::BDD_ID f = Test_ROBDD.and2(a_b_c, b_and_c);
+    EXPECT_EQ(f, b_and_c);
+}
