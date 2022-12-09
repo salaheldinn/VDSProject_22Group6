@@ -50,6 +50,8 @@ namespace ClassProject {
 
         std::unordered_map<Key,BDD_ID,KeyHasher> hash_unique_table;
 
+        std::unordered_map<Key,BDD_ID,KeyHasher> computed_table;
+
         Manager();
 
         BDD_ID createVar(const std::string &label);
