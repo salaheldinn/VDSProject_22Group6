@@ -60,6 +60,10 @@ BDD_ID Manager::ite(BDD_ID i, BDD_ID t, BDD_ID e){
         return e;
     if ((i==1) || (t==e))
         return t;
+    //check if computed table has the result
+    auto indx = computed_table.find({i, t, e});
+    if (indx!=hash_unique_table.end())
+        return indx->second;
     //not a terminal case
     //top variable added first has higher priority
     BDD_ID topvar_x;
@@ -86,6 +90,7 @@ BDD_ID Manager::ite(BDD_ID i, BDD_ID t, BDD_ID e){
         return r_high;
     //add to unique table if it does not exist already
     BDD_ID r = find_or_add_unique_table(topvar_x, r_high, r_low);
+    computed_table.insert({{i, t, e}, r});
     return r;
 }
 
