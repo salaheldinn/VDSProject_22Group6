@@ -45,13 +45,14 @@ namespace ClassProject {
     };
 
     class Manager : public ManagerInterface {
-    public:
+    private:
         std::vector<unique_table_entry> unique_table;
 
         std::unordered_map<Key,BDD_ID,KeyHasher> hash_unique_table;
 
         std::unordered_map<Key,BDD_ID,KeyHasher> computed_table;
 
+    public:
         Manager();
 
         BDD_ID createVar(const std::string &label) override;
