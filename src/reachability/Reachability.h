@@ -6,7 +6,7 @@
 namespace ClassProject {
 
     class Reachability : public ReachabilityInterface {
-    public:
+    private:
         std::vector<BDD_ID> state_variables;
 
         std::vector<BDD_ID> next_state_variables;
@@ -14,7 +14,7 @@ namespace ClassProject {
         std::vector<BDD_ID> transition_functions;
 
         std::vector<bool> init_state; //initial state
-
+    public:
         BDD_ID existential_quantification(BDD_ID f, BDD_ID x);
 
         BDD_ID img(BDD_ID f); //img(s0, s1)
