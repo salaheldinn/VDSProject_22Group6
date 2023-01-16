@@ -51,7 +51,7 @@ BDD_ID Reachability::bool_to_BDD_ID(const std::vector<bool> &stateVector) {
 Reachability::Reachability(unsigned int stateSize) : ReachabilityInterface(stateSize){
     //stateSize can't be zero
     if(stateSize==0)
-        throw std::invalid_argument("number of state variables is zero");
+        throw std::runtime_error("number of state variables is zero");
     //create state variables and initialize transition functions with ID
     BDD_ID temp, temp2;
     for(int i=0; i<stateSize; i++){
@@ -75,7 +75,7 @@ const std::vector<BDD_ID> &Reachability::getStates() const {
 
 bool Reachability::isReachable(const std::vector<bool> &stateVector){
     if (stateVector.size() != state_variables.size())
-        throw std::invalid_argument ("number of state values to be reached does not match number of state variables");
+        throw std::runtime_error ("number of state values to be reached does not match number of state variables");
     BDD_ID tau = translation_relation();
     BDD_ID C_R_it = bool_to_BDD_ID(init_state); //C_S
     BDD_ID C_R;
@@ -93,7 +93,7 @@ bool Reachability::isReachable(const std::vector<bool> &stateVector){
 void Reachability::setTransitionFunctions(const std::vector<BDD_ID> &transitionFunctions){
     //check number of transition functions
     if(transitionFunctions.size() != state_variables.size())
-        throw std::invalid_argument("number of transition functions does not match number of state variables");
+        throw std::runtime_error("number of transition functions does not match number of state variables");
     //check the IDs of transition functions
     for(int i=0; i<transitionFunctions.size(); i++)
         if (transitionFunctions[i]>uniqueTableSize()) throw std::invalid_argument("ID of transition function does not exist");
@@ -104,7 +104,7 @@ void Reachability::setTransitionFunctions(const std::vector<BDD_ID> &transitionF
 
 void Reachability::setInitState(const std::vector<bool> &stateVector){
     if (stateVector.size() != state_variables.size())
-        throw std::invalid_argument ("number of initial state variables does not match number of state variables");
+        throw std::runtime_error ("number of initial state variables does not match number of state variables");
     for(int i=0; i<stateVector.size(); i++)
         init_state[i] = stateVector[i];
 }
