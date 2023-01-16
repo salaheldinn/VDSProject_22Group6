@@ -21,7 +21,7 @@ TEST_F(ReachabilityTest, DefaultBehavior) {
     EXPECT_FALSE(fsm2->isReachable({false, true}));
     EXPECT_FALSE(fsm2->isReachable({true, false}));
     EXPECT_FALSE(fsm2->isReachable({true, true}));
-
+    //after calling the constructor, the only reachable state should be the initial state. because The default transition function for each state bit is the identity function.
     fsm2->setInitState({true,false});
     EXPECT_TRUE(fsm2->isReachable({true, false}));
     EXPECT_FALSE(fsm2->isReachable({false, false}));
@@ -42,9 +42,10 @@ TEST_F(ReachabilityTest, SetInitState) {
 }
 
 TEST_F(ReachabilityTest, setTransitionFunctions) {
-    EXPECT_THROW( {fsm2->setTransitionFunctions({true, false, false});}, std::runtime_error);
-    EXPECT_NO_THROW( fsm2->setTransitionFunctions({true, false}););
-
+    //The number of given transition functions does not match the number of state bits
+    EXPECT_THROW( {fsm2->setTransitionFunctions({0, 0, 0});}, std::runtime_error);
+    EXPECT_NO_THROW( fsm2->setTransitionFunctions({0, 0}););
+    //An unknown ID is provided
     EXPECT_THROW( {fsm2->setTransitionFunctions({7,0});}, std::runtime_error);
     EXPECT_NO_THROW( {fsm2->setTransitionFunctions({6,0});});
 }
