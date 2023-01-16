@@ -96,7 +96,7 @@ void Reachability::setTransitionFunctions(const std::vector<BDD_ID> &transitionF
         throw std::runtime_error("number of transition functions does not match number of state variables");
     //check the IDs of transition functions
     for(int i=0; i<transitionFunctions.size(); i++)
-        if (transitionFunctions[i]>uniqueTableSize()) throw std::invalid_argument("ID of transition function does not exist");
+        if (transitionFunctions[i]>uniqueTableSize()) throw std::runtime_error("ID of transition function does not exist");
     //assign transition functions
     for (int i=0; i<transitionFunctions.size(); i++)
         transition_functions[i] = transitionFunctions[i];
